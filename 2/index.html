@@ -1,0 +1,43 @@
+<html ng-app="app">
+<head>
+	<!-- setting up the base of the app -->
+	<base href="/2/">
+	<script src="js/libs/angular.min.js"></script>
+	<script src="js/libs/angular-route.min.js"></script>
+	<script type="text/javascript">
+		/** ngRoute is injected */
+		var app = angular.module('app', ['ngRoute']);
+
+		angular.module('app').config(function($routeProvider, $locationProvider) {
+
+			$locationProvider.html5Mode(true);		
+
+			$routeProvider.when('/students',{
+				templateUrl : 'views/students.html',
+				controller: 'StudentsController'
+			});	
+
+			$routeProvider.when('/details/:id?',{
+				templateUrl : 'views/students-details.html',
+				controller: 'DetailsController'
+			});		
+
+			$routeProvider.otherwise({
+				redirectTo: '/students'
+			});
+
+		});	
+		angular.module('app').controller('StudentsController',function($scope) {
+			$scope.firstName = 'Ajay 2';
+		});
+		angular.module('app').controller('DetailsController',function($scope, $routeParams) {
+			$scope.studentId = $routeParams.id;
+		});
+	</script>
+</head>
+<body >
+	<h1>Common area</h1>
+	<div ng-view></div>
+</body>
+</html>
+

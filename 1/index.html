@@ -1,0 +1,29 @@
+<html ng-app="app">
+<head>
+	<script src="js/libs/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('app', []);
+		app.controller('FirstController',function($scope) {
+			$scope.firstName = 'Tom';
+		});
+		app.controller('SecondController',function($scope) {
+			$scope.firstName = 'Ajay';
+			$scope.lastName = 'Krishnan';
+		});
+	</script>
+</head>
+<body>
+	<div ng-controller='FirstController'>
+		<h1>FirstController</h1>
+		<p>Hi, <strong>{{ firstName }}</strong></p>
+	</div>
+	<hr>
+	<div ng-controller='SecondController'>
+		<h1>SecondController</h1>
+		<p>FirstName : <strong>{{ firstName }}</strong></p>
+		<p>Last Name : <strong>{{ lastName }}</strong></p>
+		<input type="text" ng-model="firstName">
+	</div>
+</body>
+</html>
+

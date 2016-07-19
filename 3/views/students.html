@@ -1,0 +1,16 @@
+<table class="table">
+	<tr>
+		<th>ID.</th>
+		<th>First Name</th>
+		<th>Second Name</th>
+		<th>Age</th>
+		<td>Options</td>
+	</tr>
+	<tr ng-repeat="student in students" ng-class="{ selected: student.Id == selectedStudentId  }">
+		<td>{{ student.Id }}</td>
+		<td>{{ student.FirstName }}</td>
+		<td>{{ student.LastName }}</td>
+		<td>{{ student.Age }}</td>
+		<td><button ng-click="select(student)">Select</button></td>
+	</tr>
+</table>

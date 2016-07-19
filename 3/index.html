@@ -1,0 +1,46 @@
+<html ng-app="app">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+    	tr.selected td {
+    		background-color: gray;
+    	}
+    </style>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="js/libs/angular.min.js"></script>
+	<script src="js/libs/angular-route.min.js"></script>
+	<script src="js/libs/angular-resource.min.js"></script>
+	<script type="text/javascript">
+	var app = angular.module('app', ['ngRoute','ngResource']);
+	app.config(function($routeProvider) {		
+		$routeProvider.when('/students',{
+			templateUrl : 'views/students.html',
+			controller: 'StudentsController'
+		});		
+		$routeProvider.otherwise({
+			redirectTo: '/students'
+		});
+	});	
+	app.controller('StudentsController',['$scope', '$resource', function($scope, $resource) {
+
+		$scope.students = [],
+			selectedStudentId = 0;
+
+		$scope.select = function(student) {
+			$scope.selectedStudentId = student.Id
+		}
+
+		var Students = $resource('http://10.6.7.75:8090/api/Students');
+		Students.query(function(students) {
+			$scope.students = students;
+		});
+	}]);
+	</script>
+</head>
+<body ng-view>
+	
+</body>
+</html>
+

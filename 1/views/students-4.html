@@ -1,0 +1,19 @@
+<table class="table">
+	<tr ng-show="!isLoading">
+		<th>Sl No.</th>
+		<th>First Name</th>
+		<th>Second Name</th>
+		<th>Age</th>
+	</tr>	
+	<tr ng-show="isLoading">
+		<td colspan="4">
+			<div class="alert alert-success">Loading...</div>
+		</td>
+	<tr>
+	<tr ng-repeat="student in students" ng-show="!isLoading">
+		<td>{{ $index + 1 }}</td>
+		<td>{{ student.FirstName }}</td>
+		<td>{{ student.SecondName }}</td>
+		<td>{{ student.Age }}</td>
+	</tr>
+</table>
