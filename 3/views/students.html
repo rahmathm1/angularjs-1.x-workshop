@@ -6,11 +6,11 @@
 		<th>Age</th>
 		<td>Options</td>
 	</tr>
-	<tr ng-repeat="student in students" ng-class="{ selected: student.Id == selectedStudentId  }">
-		<td>{{ student.Id }}</td>
-		<td>{{ student.FirstName }}</td>
-		<td>{{ student.LastName }}</td>
-		<td>{{ student.Age }}</td>
+	<tr ng-repeat="student in students" ng-class="{ selected: student.id == selectedStudentId, active: true  }">
+		<td>{{ student.id }}</td>
+		<td>{{ student.firstName }}</td>
+		<td>{{ student.lastName }}</td>
+		<td>{{ student.age }}</td>
 		<td><button ng-click="select(student)">Select</button></td>
 	</tr>
 </table>

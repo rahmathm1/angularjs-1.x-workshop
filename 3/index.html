@@ -29,10 +29,10 @@
 			selectedStudentId = 0;
 
 		$scope.select = function(student) {
-			$scope.selectedStudentId = student.Id
+			$scope.selectedStudentId = student.id
 		}
 
-		var Students = $resource('http://10.6.7.75:8090/api/Students');
+		var Students = $resource('http://localhost:3000/api/stduents');
 		Students.query(function(students) {
 			$scope.students = students;
 		});

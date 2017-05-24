@@ -8,10 +8,9 @@
 		$routeProvider.when('/students',{
 			templateUrl : 'views/students.html',
 			controller: 'StudentsController'
-		});
-				
+		});		
 		$routeProvider.otherwise({
 			redirectTo: '/students'
 		});
-
+		
 	});	

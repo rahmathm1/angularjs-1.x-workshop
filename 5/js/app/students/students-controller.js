@@ -1,25 +1,46 @@
-	angular.module('app').controller('StudentsController',['$scope', '$resource','$http', function($scope, $resource, $http) {
+	angular.module('app').controller('StudentsController',['$scope', 'StudentsService', 
+									function($scope, StudentsService) {
 
 		$scope.students = [],
-			selectedStudent = {};
+			$scope.selectedStudent = {};
+
+		var errorHandler = function(response) {
+				alert('An error occured' + response);
+			},
+			fetchAllStudents = function() {
+				StudentsService.getAll().then(function(response) {
+					$scope.students = response.data;
+				}, errorHandler);
+			};
+
 
 		$scope.select = function(student) {
 			$scope.selectedStudent = student;
 		}
 
 		$scope.saveChanges = function(student) {
-			student.$save();
-		}
-		$scope.deleteStudent = function(student) {
-			student.$delete();
+			if(student.id) {
+				StudentsService.edit(student).then(function (response) {
+					$scope.selectedStudent = {};
+					alert('Record  with name ' + student.firstName + ' has been updated');
+				}, errorHandler);
+			} else {
+				StudentsService.create(student).then(function (response) {
+					$scope.selectedStudent = {};
+					alert('New record with name ' + student.firstName + ' is created');
+					fetchAllStudents();
+				}, errorHandler);
+			}
 		}
 
-		var Students = $resource('http://10.6.7.75:8090/api/Students/:id', 
-			{id:'@Id'} , 
-			{headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }});
-		
-		Students.query(function(students) {
-			$scope.students = students;
-		});
+		$scope.delete = function(student, index) {
+			if(confirm("Are you sure?")) {
+				StudentsService.delete(student.id).then(function (response) {
+					$scope.students.splice(index, 1);
+					alert(student.firstName + ' has been deleted');
+				}, errorHandler);
+			}
+		}
 
+		fetchAllStudents();
 	}]);

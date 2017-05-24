@@ -10,8 +10,14 @@ Or you can download the zipped version too.
 
 [Http-Server](https://www.npmjs.com/package/http-server) is a very small web server that is available as node package and can serve static files.
 
+
+### API Server
+
+[Http-Server](https://loopback.io) LoopBack is a highly-extensible, open-source Node.js framework. You can use this framework to develop restful apis for these sample apps
+
 Prerequesties:
 * Node Js
+* Loopback CLI
 
 ### Run http-server on command prompt
 

@@ -1,41 +1,56 @@
 <div class="container">
-<table class="table">
-	<tr>
-		<th>ID.</th>
-		<th>First Name</th>
-		<th>Second Name</th>
-		<th>Age</th>
-		<td>Options</td>
-	</tr>
-	<tr ng-repeat="student in students" ng-class="{ selected: student.Id == selectedStudent.Id  }">
-		<td>{{ student.Id }}</td>
-		<td>{{ student.FirstName }}</td>
-		<td>{{ student.LastName }}</td>
-		<td>{{ student.Age }}</td>
-		<td><button ng-click="select(student)">Edit</button></td>
-	</tr>
-</table>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">Edit Student</h3>
-	</div>
+	<table class="table">
+		<tr>
+			<th>ID.</th>
+			<th>First Name</th>
+			<th>Second Name</th>
+			<th>Age</th>
+			<td>Options</td>
+		</tr>
+		<tr ng-repeat="student in students" ng-class="{ selected: student.id == selectedStudent.id  }">
+			<td>{{ student.id }}</td>
+			<td>{{ student.firstName }}</td>
+			<td>{{ student.lastName }}</td>
+			<td>{{ student.age }}</td>
+			<td>
+				
+			</td>
+			<td>
+				<button ng-click="select(student)">Edit</button>
+				<button ng-click="delete(student, $index)">Delete</button>
+			</td>
+		</tr>
+		<tr ng-show="students.length == 0">
+			<td colspan="6">
+				<div class="alert alert-info">
+					No records
+				</div>
+			</td>
+		</tr>
+	</table>
 	<hr>
-	<div class="panel-body">
-	<form ng-submit="saveChanges(selectedStudent)">
-	  <div class="form-group">
-	    <label for="firstName">First Name</label>
-	    <input type="text" class="form-control" placeholder="First Name" ng-model="selectedStudent.FirstName">
-	  </div>
-	  <div class="form-group">
-	    <label for="lastName">Password</label>
-	    <input type="text" class="form-control" placeholder="Last Name" ng-model="selectedStudent.LastName">
-	  </div>
-	  <div class="form-group">
-	    <label for="age">Age</label>
-	    <input type="text" class="form-control" placeholder="Age" ng-model="selectedStudent.Age">
-	  </div>
-	  <button type="submit" class="btn btn-default">Save</button>
-	</form>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Edit Student</h3>
+		</div>
+		<div class="panel-body">
+		<form ng-submit="saveChanges(selectedStudent)">
+		  <div class="form-group">
+		    <label for="firstName">First Name</label>
+		    <input type="text" class="form-control" placeholder="First Name" ng-model="selectedStudent.firstName">
+		  </div>
+		  <div class="form-group">
+		    <label for="lastName">Password</label>
+		    <input type="text" class="form-control" placeholder="Last Name" ng-model="selectedStudent.lastName">
+		  </div>
+		  <div class="form-group">
+		    <label for="age">Age</label>
+		    <input type="text" class="form-control" placeholder="Age" ng-model="selectedStudent.age">
+		  </div>
+		  <button type="submit" class="btn btn-primary" ng-show="selectedStudent.id">Save</button>
+		  <button type="submit" class="btn btn-primary" ng-hide="selectedStudent.id">Add</button>
+		  <button type="button" class="btn btn-default" ng-click="selectedStudent={}">Clear</button>
+		</form>
+		</div>
 	</div>
-</div>
 </div>
