@@ -4,6 +4,9 @@
 		$scope.students = [],
 			$scope.selectedStudent = {};
 
+		$scope.samplePhoneNumber = "1126984703";
+		$scope.sampleName = "tom hanks";
+
 		var errorHandler = function(response) {
 				alert('An error occured' + response);
 			},
@@ -19,25 +22,27 @@
 		}
 
 		$scope.saveChanges = function(student) {
-			if(student.Id) {
+			if(student.id) {
 				StudentsService.edit(student).then(function (response) {
 					$scope.selectedStudent = {};
-					alert('Changes has been saved');
+					alert('Record  with name ' + student.firstName + ' has been updated');
 				}, errorHandler);
 			} else {
 				StudentsService.create(student).then(function (response) {
 					$scope.selectedStudent = {};
-					alert('New record is created');
+					alert('New record with name ' + student.firstName + ' is created');
 					fetchAllStudents();
 				}, errorHandler);
 			}
 		}
 
 		$scope.delete = function(student, index) {
-			StudentsService.delete(student.Id).then(function (response) {
-				$scope.students.splice(index, 1);
-				alert(student.FirstName + ' has been deleted');
-			}, errorHandler);
+			if(confirm("Are you sure?")) {
+				StudentsService.delete(student.id).then(function (response) {
+					$scope.students.splice(index, 1);
+					alert(student.firstName + ' has been deleted');
+				}, errorHandler);
+			}
 		}
 
 		fetchAllStudents();

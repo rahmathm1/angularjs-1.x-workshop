@@ -1,24 +1,12 @@
 angular.module('app').service('StudentsService', ['$http', 'CommonService', '$q', function($http, CommonService, $q) {
-	var baseUrl = CommonService.baseUrl + '/Students/',
-		processServerResponse = function(data) {
-			angular.forEach(data, function(value, key) {
-			 	value['Status'] = Math.floor(Math.random() * 3) + 1 ;
-			});	
-			return data;	
-		};
+	
+	var baseUrl = CommonService.baseUrl + '/stduents/';
 
 	this.getAll = function() {
-		var processedData, deferred = $q.defer();
-		$http({
+		return $http({
 			method: 'GET',
 			url: baseUrl
-		}).then(function (response) {
-			processedData = processServerResponse(response.data);
-			deferred.resolve(processedData);
-		}, function (response) {
-			deferred.reject(response);
 		});
-		return deferred.promise;
 	};
 
 	this.get = function(id) {
@@ -30,16 +18,21 @@ angular.module('app').service('StudentsService', ['$http', 'CommonService', '$q'
 
 	this.delete = function(id) {
 		var deferred = $q.defer();
-		return $http({
+		$http({
 			method: 'DELETE',
 			url: baseUrl + id
+		}).then(function (response) {
+			deferred.resolve(response);
+		}, function (response) {
+			deferred.reject(response);
 		});
+		return deferred.promise;
 	};
 
 	this.edit = function(data) {
 		return $http({
 			method: 'PUT',
-			url: baseUrl + data.Id,
+			url: baseUrl + data.id,
 			data: data
 		});
 	};

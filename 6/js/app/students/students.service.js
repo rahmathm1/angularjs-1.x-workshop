@@ -1,5 +1,6 @@
 angular.module('app').service('StudentsService', ['$http', 'CommonService', '$q', function($http, CommonService, $q) {
-	var baseUrl = CommonService.baseUrl + '/Students/';
+	
+	var baseUrl = CommonService.baseUrl + '/stduents/';
 
 	this.getAll = function() {
 		return $http({
@@ -31,7 +32,7 @@ angular.module('app').service('StudentsService', ['$http', 'CommonService', '$q'
 	this.edit = function(data) {
 		return $http({
 			method: 'PUT',
-			url: baseUrl + data.Id,
+			url: baseUrl + data.id,
 			data: data
 		});
 	};
